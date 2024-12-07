@@ -1,0 +1,39 @@
+# TODO prettier & import aren't run on lint...
+extends:
+  - next/core-web-vitals
+  - next/typescript
+  - prettier
+  - plugin:import/recommended
+  - plugin:import/typescript
+  - plugin:perfectionist/recommended-natural-legacy
+plugins:
+  - import
+settings:
+  import/parsers:
+    "@typescript-eslint/parser": [".ts", ".tsx"]
+  import/resolver:
+    node: true
+
+rules:
+  "@typescript-eslint/method-signature-style":
+    - error
+    - property
+  perfectionist/sort-imports: 0
+  import/no-unresolved: error
+  import/order:
+    - error
+    - groups:
+        - builtin
+        - external
+        - internal
+        - [parent, sibling]
+        - index
+      pathGroups:
+        - pattern: react
+          group: external
+          position: before
+      pathGroupsExcludedImportTypes: [react]
+      newlines-between: always
+      alphabetize:
+        order: asc
+        caseInsensitive: true
